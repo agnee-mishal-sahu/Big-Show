@@ -1,14 +1,15 @@
 package com.big.show.entity;
 
-import com.big.show.enums.Gender;
 import com.big.show.enums.UserRole;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Host extends AppUser{
 	
-	private Gender gender;
+	private String gender;
+	@OneToOne
 	private Address address;
 	private String photoURL;
 	private String idProof;
@@ -16,7 +17,7 @@ public class Host extends AppUser{
 	private String venueLicenseNumber;
 	
 	public Host(Integer userId, String userName, String password, UserRole role, String name, String phone,
-			String email, Gender gender, Address address, String photoURL, String idProof, String idProofNumber,
+			String email, String gender, Address address, String photoURL, String idProof, String idProofNumber,
 			String venueLicenseNumber) {
 		super(userId, userName, password, role, name, phone, email);
 		this.gender = gender;
@@ -31,11 +32,11 @@ public class Host extends AppUser{
 		
 	}
 
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(Gender gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

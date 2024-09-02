@@ -1,31 +1,30 @@
-package com.big.show.entity;
+package com.big.show.dto;
 
 import java.util.Date;
 
+import com.big.show.entity.Address;
 import com.big.show.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-
-@Entity
-public class Member extends AppUser{
-
+@JsonInclude(Include.NON_EMPTY)
+public class MemberDto extends AppUserDto{
+	
 	private String gender;
-	@OneToOne
 	private Address address;
 	private String photoURL;
 	private Date birthday;
 	
-	public Member(Integer userId, String userName, String password, UserRole role, String name, String phone,
+	public MemberDto(Integer userId, String userName, UserRole role, String name, String phone,
 			String email, String gender, Address address, String photoURL, Date birthday) {
-		super(userId, userName, password, role, name, phone, email);
+		super(userId, userName, role, name, phone, email);
 		this.gender = gender;
 		this.address = address;
 		this.photoURL = photoURL;
 		this.birthday = birthday;
 	}
 	
-	public Member() {
+	public MemberDto() {
 		
 	}
 
@@ -66,7 +65,4 @@ public class Member extends AppUser{
 		return "Member [gender=" + gender + ", address=" + address + ", photoURL=" + photoURL + ", birthday=" + birthday
 				+ "]";
 	}
-	
-	
-	
 }
