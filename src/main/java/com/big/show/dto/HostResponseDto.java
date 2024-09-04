@@ -1,7 +1,6 @@
 package com.big.show.dto;
 
-import java.util.Date;
-
+import com.big.show.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -10,14 +9,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
-public class MemberDto extends AppUserDto{
+public class HostResponseDto {
 	
-	private String gender;
-	private AddressDto address;
-	private String photoURL;
-	private Date birthday;
-	
+	private Integer userId;
+	private String userName;
+	private UserRole role;
+	private String venueLicenseNumber;
+	private String status;
 }

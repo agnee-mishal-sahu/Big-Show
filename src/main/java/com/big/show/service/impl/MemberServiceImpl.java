@@ -14,8 +14,8 @@ import com.big.show.entity.Address;
 import com.big.show.entity.Member;
 import com.big.show.enums.UserRole;
 import com.big.show.exception.MemberException;
-import com.big.show.repository.AddressRepository;
 import com.big.show.repository.MemberRepository;
+import com.big.show.service.AddressService;
 import com.big.show.service.MemberService;
 
 @Service
@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
 	MemberRepository memberRepository;
 
 	@Autowired
-	AddressRepository addressRepository;
+	AddressService addressService;
 
 	@Override
 	public MemberResponseDto signUpUser(Member member) throws MemberException {
@@ -39,7 +39,7 @@ public class MemberServiceImpl implements MemberService {
 				member.setRole(UserRole.Member);
 
 				if (member.getAddress() != null) {
-					addressRepository.save(member.getAddress());
+					addressService.saveAddress(member.getAddress());
 				}
 				memberEntity = memberRepository.save(member);
 
@@ -77,15 +77,17 @@ public class MemberServiceImpl implements MemberService {
 		member.setPhotoURL(memberDto.getPhotoURL());
 		member.setBirthday(memberDto.getBirthday());
 
-		address = member.getAddress();
-		address.setAddress1(memberDto.getAddress().getAddress1());
-		address.setCity(memberDto.getAddress().getCity());
-		address.setCountry(memberDto.getAddress().getCountry());
-		address.setNearBy(memberDto.getAddress().getNearBy());
-		address.setZip(memberDto.getAddress().getZip());
+		if (member.getAddress() != null) {
+			address = member.getAddress();
+			address.setAddress1(memberDto.getAddress().getAddress1());
+			address.setCity(memberDto.getAddress().getCity());
+			address.setCountry(memberDto.getAddress().getCountry());
+			address.setNearBy(memberDto.getAddress().getNearBy());
+			address.setZip(memberDto.getAddress().getZip());
 
-		addressRepository.save(address);
-		member.setAddress(address);
+			addressService.saveAddress(address);
+			member.setAddress(address);
+		}
 
 		if (validateMember(member, false)) {
 			memberRepository.save(member);
@@ -125,9 +127,26 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String deleteMember(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public String deleteMember(Integer userId) throws MemberException {
+
+		Optional<Member> memberOptional = memberRepository.findById(userId);
+		Address address = new Address();
+
+		if (memberOptional.isEmpty()) {
+			throw new MemberException(MessageConstant.MEMBER_NOT_FOUND);
+		}
+		Member member = memberOptional.get();
+
+		if (member.getAddress() != null) {
+			address = addressService.getAddress(member.getAddress().getAddressId());
+		}
+		memberRepository.delete(member);
+
+		if (address != null) {
+			addressService.deleteAddress(address);
+		}
+
+		return "User with Id:" + userId + " deleted successfully.";
 	}
 
 	private boolean validateMember(Member member, boolean isSignUp) throws MemberException {

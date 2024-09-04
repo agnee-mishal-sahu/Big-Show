@@ -3,6 +3,7 @@ package com.big.show.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,5 +38,10 @@ public class MemberController {
 	@GetMapping("/{userid}")
 	ResponseEntity<?> getMemberById(@PathVariable Integer userid) throws MemberException{
 		return new ResponseEntity<>(memberService.getMemberById(userid),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{userid}")
+	ResponseEntity<?> deleteMember(@PathVariable Integer userid) throws MemberException{
+		return new ResponseEntity<>(memberService.deleteMember(userid),HttpStatus.OK);
 	}
 }

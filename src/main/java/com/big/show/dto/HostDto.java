@@ -13,11 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
-public class MemberDto extends AppUserDto{
+public class HostDto extends AppUserDto{
 	
 	private String gender;
 	private AddressDto address;
 	private String photoURL;
-	private Date birthday;
+	private String idProof;
+	private String idProofNumber;
+	private String venueLicenseNumber;
+	private Date licenseExpiryDate;
 	
 }
