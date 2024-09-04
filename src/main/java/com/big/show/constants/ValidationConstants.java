@@ -8,6 +8,8 @@ public class ValidationConstants {
 
 	public static final String USERNAME_EXISTS = "Username already exists.please choose another username.";
 	
-	public static final String INCOMPLETE_DATA = "Please provide username and password.";
+	public static final String BLANK_USERNAME = "Please provide username.";
+	
+	public static final String BLANK_PASSWORD = "Please provide password.";
 
 }

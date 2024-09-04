@@ -2,7 +2,6 @@ package com.big.show.dto;
 
 import java.util.Date;
 
-import com.big.show.entity.Address;
 import com.big.show.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -11,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class MemberDto extends AppUserDto{
 	
 	private String gender;
-	private Address address;
+	private AddressDto address;
 	private String photoURL;
 	private Date birthday;
 	
 	public MemberDto(Integer userId, String userName, UserRole role, String name, String phone,
-			String email, String gender, Address address, String photoURL, Date birthday) {
+			String email, String gender, AddressDto address, String photoURL, Date birthday) {
 		super(userId, userName, role, name, phone, email);
 		this.gender = gender;
 		this.address = address;
@@ -36,11 +35,11 @@ public class MemberDto extends AppUserDto{
 		this.gender = gender;
 	}
 
-	public Address getAddress() {
+	public AddressDto getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(AddressDto address) {
 		this.address = address;
 	}
 
