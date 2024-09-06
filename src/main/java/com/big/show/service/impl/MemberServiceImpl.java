@@ -59,7 +59,7 @@ public class MemberServiceImpl implements MemberService {
 		Address address = new Address();
 
 		if (memberOptional.isEmpty()) {
-			throw new MemberException(MessageConstant.MEMBER_NOT_FOUND);
+			throw new MemberException(MessageConstant.USER_NOT_FOUND);
 		}
 
 		Member member = memberOptional.get();
@@ -93,7 +93,7 @@ public class MemberServiceImpl implements MemberService {
 			memberRepository.save(member);
 		}
 
-		return "member with id:" + member.getUserId() + " is updated successfully";
+		return MessageConstant.USER_UPDATED + memberDto.getUserName();
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class MemberServiceImpl implements MemberService {
 		AddressDto addressResponse = new AddressDto();
 
 		if (memberOptional.isEmpty()) {
-			throw new MemberException(MessageConstant.MEMBER_NOT_FOUND);
+			throw new MemberException(MessageConstant.USER_NOT_FOUND);
 		}
 		Member member = memberOptional.get();
 		memberResponse.setUserName(member.getUserName());
@@ -133,7 +133,7 @@ public class MemberServiceImpl implements MemberService {
 		Address address = new Address();
 
 		if (memberOptional.isEmpty()) {
-			throw new MemberException(MessageConstant.MEMBER_NOT_FOUND);
+			throw new MemberException(MessageConstant.USER_NOT_FOUND);
 		}
 		Member member = memberOptional.get();
 
@@ -146,7 +146,7 @@ public class MemberServiceImpl implements MemberService {
 			addressService.deleteAddress(address);
 		}
 
-		return "User with Id:" + userId + " deleted successfully.";
+		return MessageConstant.USER_DELETED;
 	}
 
 	private boolean validateMember(Member member, boolean isSignUp) throws MemberException {

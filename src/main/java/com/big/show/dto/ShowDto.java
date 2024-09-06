@@ -1,4 +1,4 @@
-package com.big.show.entity;
+package com.big.show.dto;
 
 import java.util.Date;
 import java.util.List;
@@ -6,11 +6,9 @@ import java.util.List;
 import com.big.show.constants.MessageConstant;
 import com.big.show.enums.ShowType;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,11 +16,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Shows {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+@JsonInclude(Include.NON_EMPTY)
+public class ShowDto {
+
 	private Integer showId;
 	private Integer venueId;
 	private String showName;

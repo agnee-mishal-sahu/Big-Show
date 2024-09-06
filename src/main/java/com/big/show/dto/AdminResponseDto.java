@@ -12,13 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
-public class AppUserDto {
+public class AdminResponseDto {
 	
 	private Integer userId;
 	private String userName;
 	private UserRole role;
-	private String name;
-	private String phone;
-	private String email;
-	private String gender;
+	private String status;
 }

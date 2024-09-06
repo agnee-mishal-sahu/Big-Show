@@ -2,7 +2,11 @@ package com.big.show.entity;
 
 import java.util.Date;
 
+import com.big.show.enums.LicenseStatus;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Host extends AppUser {
 
-	private String gender;
 	@OneToOne
 	private Address address;
 	private String photoURL;
@@ -22,6 +25,8 @@ public class Host extends AppUser {
 	private String idProofNumber;
 	private String venueLicenseNumber;
 	private Date licenseExpiryDate;
+	@Enumerated(EnumType.STRING)
+	private LicenseStatus licenseStatus;
 
 
 }

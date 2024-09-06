@@ -14,5 +14,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 	
+	@ExceptionHandler(HostException.class)
+    public ResponseEntity<Object> handleHostException(HostException ex) {
+        String errorMessage = ex.getMessage();
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+	
+	@ExceptionHandler(AdminException.class)
+    public ResponseEntity<Object> handleAdminException(AdminException ex) {
+        String errorMessage = ex.getMessage();
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    }
 
 }

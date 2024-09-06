@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Member extends AppUser{
 
-	private String gender;
 	@OneToOne
 	private Address address;
 	private String photoURL;

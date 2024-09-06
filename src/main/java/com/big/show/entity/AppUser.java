@@ -30,4 +30,5 @@ public class AppUser {
 	private String name;
 	private String phone;
 	private String email;
+	private String gender;
 }
